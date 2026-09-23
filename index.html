@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PES 6 Pro Career Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>PES 6</h2>
+        <span>Career Hub</span>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="nav-btn" data-tab="tables">Leagues & Standings</button>
+        <button class="nav-btn" data-tab="fixtures">Fixtures & Calendar</button>
+        <button class="nav-btn" data-tab="stats">Top Scorers & Records</button>
+        <button class="nav-btn" data-tab="awards">Ballon d'Or & Awards</button>
+        <button class="nav-btn" data-tab="squad">Squad & Tactics</button>
+        <button class="nav-btn" data-tab="settings">Game Settings</button>
+      </nav>
+      <div class="manager-card" id="managerCard">
+        <small>Managing</small>
+        <h4 id="managedTeamName">Arsenal</h4>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- CAREER SELECTOR / NEW GAME OVERLAY -->
+      <section id="careerSetup" class="career-setup-overlay" style="display: none;">
+        <div class="career-setup-card">
+          <h2>Create Manager Career</h2>
+          <p style="color: var(--text-muted); margin-bottom: 20px;">Define your manager profile and starting club</p>
+
+          <div class="setup-group">
+            <label>Manager Name</label>
+            <input type="text" id="managerNameInput" class="custom-input" placeholder="e.g. Arsène Wenger" value="Jamal Mahmood" />
+          </div>
+
+          <div class="setup-group">
+            <label>Select League</label>
+            <select id="setupLeagueSelect" class="custom-select">
+              <option value="premier_league">English Premiership</option>
+              <option value="ligue_1">Ligue 1</option>
+              <option value="serie_a">Serie A</option>
+              <option value="eredivisie">Eredivisie</option>
+              <option value="la_liga">Liga Española</option>
+              <option value="rest_of_europe">Rest of Europe</option>
+            </select>
+          </div>
+
+          <div class="setup-group">
+            <label>Select Club</label>
+            <select id="setupTeamSelect" class="custom-select">
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div class="setup-group">
+            <label>Manage a National Team as Well?</label>
+            <select id="setupNationalSelect" class="custom-select">
+              <option value="none">None (Focus on Club)</option>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <button id="btnStartCareer" class="action-btn" style="margin-top: 15px;">Begin Career</button>
+        </div>
+      </section>
+
+      <!-- 1. DASHBOARD TAB -->
+      <section id="dashboard" class="tab-content active">
+        <header class="content-header">
+          <div>
+            <h1 id="dashboardManagerTitle">Manager Dashboard</h1>
+            <small id="nationalJobBadge" style="color: var(--accent); font-weight: 600;"></small>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="btnResetCareer" class="action-btn" style="background: var(--bg-hover); color: var(--text-muted); width: auto; padding: 6px 14px; font-size: 12px;">New Game</button>
+            <div class="date-badge" id="currentDateDisplay">Gameweek 1 - Season 2006/07</div>
+          </div>
+        </header>
+
+        <div class="dashboard-grid">
+          <!-- Upcoming Match Card -->
+          <div class="card next-match-card">
+            <h3>Upcoming Fixture</h3>
+            <div class="matchup-preview">
+              <span class="team-badge" id="homeTeamName">Club A</span>
+              <span class="vs">VS</span>
+              <span class="team-badge" id="awayTeamName">Club B</span>
+            </div>
+            <p class="match-meta" id="matchCompetition">Matchday 1</p>
+            <button id="btnLaunchMatch" class="action-btn">Launch PES 6 Match</button>
+          </div>
+
+          <!-- Quick Standings Card -->
+          <div class="card quick-standings">
+            <h3>League Standings (Top 5)</h3>
+            <table class="data-table" id="quickTable">
+              <thead>
+                <tr>
+                  <th>Pos</th>
+                  <th>Club</th>
+                  <th>P</th>
+                  <th>GD</th>
+                  <th>Pts</th>
+                </tr>
+              </thead>
+              <tbody id="quickTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. LEAGUES & STANDINGS TAB -->
+      <section id="tables" class="tab-content">
+        <header class="content-header">
+          <h1>Leagues & Standings</h1>
+          <select id="leagueSelector" class="custom-select">
+            <option value="premier_league">Premier League (England)</option>
+            <option value="ligue_1">Ligue 1 (France)</option>
+            <option value="serie_a">Serie A (Italy)</option>
+            <option value="eredivisie">Eredivisie (Netherlands)</option>
+            <option value="la_liga">La Liga (Spain)</option>
+            <option value="rest_of_europe">Rest of Europe</option>
+          </select>
+        </header>
+
+        <div class="card full-width">
+          <table class="data-table" id="fullLeagueTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Club</th>
+                <th>Played</th>
+                <th>Won</th>
+                <th>Drawn</th>
+                <th>Lost</th>
+                <th>GF</th>
+                <th>GA</th>
+                <th>GD</th>
+                <th>Pts</th>
+              </tr>
+            </thead>
+            <tbody id="fullLeagueTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. FIXTURES & CALENDAR TAB -->
+      <section id="fixtures" class="tab-content">
+        <header class="content-header">
+          <h1>Season Fixtures & Results</h1>
+          <div style="display: flex; gap: 10px;">
+            <select id="fixtureLeagueSelector" class="custom-select">
+              <option value="premier_league">Premier League</option>
+              <option value="ligue_1">Ligue 1</option>
+              <option value="serie_a">Serie A</option>
+              <option value="eredivisie">Eredivisie</option>
+              <option value="la_liga">La Liga</option>
+              <option value="rest_of_europe">Rest of Europe</option>
+            </select>
+            <select id="matchdaySelector" class="custom-select" style="max-width: 150px;"></select>
+          </div>
+        </header>
+
+        <div class="card full-width">
+          <div id="fixturesListContainer" class="fixtures-grid"></div>
+        </div>
+      </section>
+
+      <!-- 4. STATS & TOP SCORERS TAB -->
+      <section id="stats" class="tab-content">
+        <header class="content-header">
+          <h1>Player Statistics & Records</h1>
+          <select id="statsLeagueSelector" class="custom-select">
+            <option value="all">All Leagues Combined</option>
+            <option value="premier_league">Premier League</option>
+            <option value="ligue_1">Ligue 1</option>
+            <option value="serie_a">Serie A</option>
+            <option value="eredivisie">Eredivisie</option>
+            <option value="la_liga">La Liga</option>
+            <option value="rest_of_europe">Rest of Europe</option>
+          </select>
+        </header>
+
+        <div class="card full-width">
+          <h3>Golden Boot Leaderboard (Top Scorers)</h3>
+          <table class="data-table" id="topScorersTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Player</th>
+                <th>Club</th>
+                <th>Position</th>
+                <th>Assists</th>
+                <th>Goals</th>
+              </tr>
+            </thead>
+            <tbody id="topScorersTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. AWARDS TAB -->
+      <section id="awards" class="tab-content">
+        <header class="content-header">
+          <h1>Individual Accolades & Trophies</h1>
+        </header>
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <h3>Ballon d'Or Power Rankings</h3>
+            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;">Based on ratings, goals, assists, and performance.</p>
+            <table class="data-table" id="ballonDorTable">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Player</th>
+                  <th>Club</th>
+                  <th>Score Points</th>
+                </tr>
+              </thead>
+              <tbody id="ballonDorTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <h3>European Golden Shoe</h3>
+            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;">Leading domestic goalscorer across all leagues.</p>
+            <div id="goldenShoeLeader" style="padding: 20px 0; text-align: center;"></div>
+          </div>
+        </div>
+      </section>
+
+<!-- 6. SQUAD & TACTICS TAB (FIFA TEAM MANAGEMENT ENGINE) -->
+      <section id="squad" class="tab-content">
+        <div class="fifa-management-wrapper">
+          
+          <!-- Top Bar: Formations & Status -->
+          <div class="fifa-top-bar">
+            <div class="fifa-tabs-left">
+              <span class="fifa-title-pill">SQUAD</span>
+              <select id="formationSelector" class="fifa-select-inline">
+                <option value="4-3-3">4-3-3 Attack</option>
+                <option value="4-2-3-1">4-2-3-1 Modern</option>
+                <option value="4-4-2">4-4-2 Flat</option>
+                <option value="3-5-2">3-5-2 Wingback</option>
+              </select>
+            </div>
+            <div id="selectionStatusChip" class="fifa-action-pill">SELECT PLAYER</div>
+          </div>
+
+          <!-- Player Inspection Banner (Radar & Bio) -->
+          <div class="fifa-player-banner" id="playerInspector">
+            <div class="inspector-bio">
+              <div class="inspector-avatar" id="inspectAvatar">👤</div>
+              <div class="inspector-text">
+                <div class="inspector-pos-ovr">
+                  <span id="inspectPos" class="pos-tag pos-att">CF</span>
+                  <span id="inspectOvr" class="big-ovr">97</span>
+                  <span id="inspectCond" class="cond-icon">⬆</span>
+                </div>
+                <h2 id="inspectName">Player Name</h2>
+                <small id="inspectClubNat">Club • Nationality</small>
+              </div>
+            </div>
+
+            <!-- Hexagon Radar Attribute Chart -->
+            <div class="inspector-radar">
+              <svg viewBox="0 0 200 180" class="radar-svg">
+                <!-- Background Hexagon Grids -->
+                <polygon points="100,20 165,55 165,125 100,160 35,125 35,55" class="radar-grid" />
+                <polygon points="100,45 140,68 140,112 100,135 60,112 60,68" class="radar-grid-inner" />
+                <!-- Dynamic Player Stat Shape -->
+                <polygon id="radarPolygon" points="100,30 155,60 150,120 100,150 45,115 45,65" class="radar-fill" />
+                <!-- Stat Labels -->
+                <text x="100" y="14" class="radar-label" text-anchor="middle">Pace</text>
+                <text x="180" y="58" class="radar-label" text-anchor="start">Shooting</text>
+                <text x="180" y="128" class="radar-label" text-anchor="start">Passing</text>
+                <text x="100" y="174" class="radar-label" text-anchor="middle">Dribbling</text>
+                <text x="20" y="128" class="radar-label" text-anchor="end">Defending</text>
+                <text x="20" y="58" class="radar-label" text-anchor="end">Physical</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Perspective 3D Football Pitch -->
+          <div class="fifa-pitch-viewport">
+            <div class="fifa-pitch-surface" id="tacticalPitch">
+              <div class="pitch-line pitch-box-top"></div>
+              <div class="pitch-line pitch-center-circle"></div>
+              <div class="pitch-line pitch-box-bottom"></div>
+              <div class="pitch-line pitch-half-line"></div>
+              
+              <!-- 11 Pitch Starters Layer -->
+              <div id="pitchSlotsLayer" class="fifa-starters-layer"></div>
+            </div>
+          </div>
+
+          <!-- Horizontal Substitutes Bench -->
+          <div class="fifa-bench-wrapper">
+            <div class="bench-label-bar">
+              <span>SUBSTITUTES</span>
+              <small>Click to inspect, swap on pitch, or reorder bench</small>
+            </div>
+            <div class="fifa-bench-track" id="benchCardsContainer">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 7. GAME SETTINGS TAB (WITH BROWSE BUTTON) -->
+      <section id="settings" class="tab-content">
+        <header class="content-header">
+          <h1>Game Settings & Directory</h1>
+        </header>
+        <div class="card full-width">
+          <label for="pesPathInput" style="display:block; margin-bottom: 8px; font-weight: 600;">PES 6 Executable Location (pes6.exe):</label>
+          <div style="display: flex; gap: 10px; max-width: 600px;">
+            <input type="text" id="pesPathInput" class="custom-input" style="max-width: 100%; flex-grow: 1;" placeholder="Select or paste path to pes6.exe" />
+            <button id="browsePesBtn" class="action-btn" style="width: auto; padding: 10px 18px; white-space: nowrap;">Browse...</button>
+          </div>
+          <button id="saveSettingsBtn" class="action-btn" style="margin-top: 18px; max-width: 200px;">Save Settings</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Score Entry Dialog Modal -->
+  <div id="scoreModal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <h3 id="modalTitle">Match Result</h3>
+      <p id="modalMatchup" style="color: var(--text-muted); margin: 10px 0;"></p>
+      
+      <div class="score-input-group">
+        <div class="score-box">
+          <label id="modalHomeName">Home</label>
+          <input type="number" id="homeScoreInput" min="0" max="20" value="0" />
+        </div>
+        <span class="colon">-</span>
+        <div class="score-box">
+          <label id="modalAwayName">Away</label>
+          <input type="number" id="awayScoreInput" min="0" max="20" value="0" />
+        </div>
+      </div>
+
+      <div class="modal-actions" style="display: flex; gap: 10px;">
+        <button id="closeModalBtn" class="action-btn" style="background-color: var(--bg-hover); color: var(--text-main);">Cancel</button>
+        <button id="confirmScoreBtn" class="action-btn">Confirm & Advance Week</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

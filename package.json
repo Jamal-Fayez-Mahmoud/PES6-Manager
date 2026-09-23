@@ -1,0 +1,12 @@
+{
+  "name": "pes6-manager",
+  "version": "1.0.0",
+  "description": "Custom Career Hub for PES 6",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^latest"
+  }
+}
