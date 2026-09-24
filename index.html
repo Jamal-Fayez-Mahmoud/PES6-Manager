@@ -7,111 +7,105 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app-container">
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-      <div class="logo">
-        <h2>PES 6</h2>
-        <span>Career Hub</span>
+
+  <!-- CAREER SETUP MODAL -->
+  <div id="careerSetup" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <h2>Create Manager Career</h2>
+      <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">Define your manager profile and starting club</p>
+
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 12px; margin-bottom: 4px;">Manager Name</label>
+        <input type="text" id="managerNameInput" class="custom-input" value="Manager" />
       </div>
+
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 12px; margin-bottom: 4px;">Select League</label>
+        <select id="setupLeagueSelect" class="custom-select">
+          <option value="premier_league">English Premiership</option>
+          <option value="la_liga">Liga Española</option>
+          <option value="serie_a">Serie A</option>
+          <option value="ligue_1">Ligue 1</option>
+          <option value="eredivisie">Eredivisie</option>
+          <option value="rest_of_europe">Rest of Europe</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 12px; margin-bottom: 4px;">Select Club</label>
+        <select id="setupTeamSelect" class="custom-select"></select>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; font-size: 12px; margin-bottom: 4px;">Manage a National Team as Well?</label>
+        <select id="setupNationalSelect" class="custom-select"></select>
+      </div>
+
+      <button id="btnStartCareer" class="action-btn">Begin Career</button>
+    </div>
+  </div>
+
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo-title">PES 6</h1>
+        <span class="logo-subtitle">CAREER HUB</span>
+      </div>
+
       <nav class="nav-links">
         <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
         <button class="nav-btn" data-tab="tables">Leagues & Standings</button>
+        <button class="nav-btn" data-tab="ucl">European Cups</button>
         <button class="nav-btn" data-tab="fixtures">Fixtures & Calendar</button>
         <button class="nav-btn" data-tab="stats">Top Scorers & Records</button>
         <button class="nav-btn" data-tab="awards">Ballon d'Or & Awards</button>
         <button class="nav-btn" data-tab="squad">Squad & Tactics</button>
+        <button class="nav-btn" data-tab="transfers">Transfers & Finances</button>
         <button class="nav-btn" data-tab="settings">Game Settings</button>
       </nav>
-      <div class="manager-card" id="managerCard">
-        <small>Managing</small>
-        <h4 id="managedTeamName">Arsenal</h4>
+
+      <div class="user-badge">
+        <small style="color: var(--text-muted); display: block;">MANAGING</small>
+        <strong id="managedTeamName">Arsenal</strong>
       </div>
     </aside>
 
-    <!-- Main Content Area -->
+    <!-- MAIN CONTENT -->
     <main class="main-content">
-
-      <!-- CAREER SELECTOR / NEW GAME OVERLAY -->
-      <section id="careerSetup" class="career-setup-overlay" style="display: none;">
-        <div class="career-setup-card">
-          <h2>Create Manager Career</h2>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">Define your manager profile and starting club</p>
-
-          <div class="setup-group">
-            <label>Manager Name</label>
-            <input type="text" id="managerNameInput" class="custom-input" placeholder="e.g. Arsène Wenger" value="Jamal Mahmood" />
-          </div>
-
-          <div class="setup-group">
-            <label>Select League</label>
-            <select id="setupLeagueSelect" class="custom-select">
-              <option value="premier_league">English Premiership</option>
-              <option value="ligue_1">Ligue 1</option>
-              <option value="serie_a">Serie A</option>
-              <option value="eredivisie">Eredivisie</option>
-              <option value="la_liga">Liga Española</option>
-              <option value="rest_of_europe">Rest of Europe</option>
-            </select>
-          </div>
-
-          <div class="setup-group">
-            <label>Select Club</label>
-            <select id="setupTeamSelect" class="custom-select">
-              <!-- Populated via JS -->
-            </select>
-          </div>
-
-          <div class="setup-group">
-            <label>Manage a National Team as Well?</label>
-            <select id="setupNationalSelect" class="custom-select">
-              <option value="none">None (Focus on Club)</option>
-              <!-- Populated via JS -->
-            </select>
-          </div>
-
-          <button id="btnStartCareer" class="action-btn" style="margin-top: 15px;">Begin Career</button>
-        </div>
-      </section>
 
       <!-- 1. DASHBOARD TAB -->
       <section id="dashboard" class="tab-content active">
         <header class="content-header">
           <div>
             <h1 id="dashboardManagerTitle">Manager Dashboard</h1>
-            <small id="nationalJobBadge" style="color: var(--accent); font-weight: 600;"></small>
+            <small id="nationalJobBadge" style="color: var(--accent); font-weight: 700;"></small>
           </div>
-          <div style="display: flex; gap: 10px;">
-            <button id="btnResetCareer" class="action-btn" style="background: var(--bg-hover); color: var(--text-muted); width: auto; padding: 6px 14px; font-size: 12px;">New Game</button>
-            <div class="date-badge" id="currentDateDisplay">Gameweek 1 - Season 2006/07</div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span id="currentDateDisplay" class="date-badge">Gameweek 1 of 42</span>
+            <button id="btnResetCareer" class="action-btn" style="background: rgba(255, 51, 51, 0.15); color: #ff4d4d; border: 1px solid rgba(255, 51, 51, 0.3); width: auto; padding: 6px 12px; font-size: 11px;">New Game</button>
           </div>
         </header>
 
         <div class="dashboard-grid">
-          <!-- Upcoming Match Card -->
-          <div class="card next-match-card">
-            <h3>Upcoming Fixture</h3>
-            <div class="matchup-preview">
-              <span class="team-badge" id="homeTeamName">Club A</span>
-              <span class="vs">VS</span>
-              <span class="team-badge" id="awayTeamName">Club B</span>
+          <!-- Upcoming Match -->
+          <div class="card matchup-card">
+            <h3>Next Match</h3>
+            <p id="matchCompetition" style="color: var(--text-muted); font-size: 12px; margin-bottom: 12px;">Matchday</p>
+            <div class="teams-display">
+              <strong id="homeTeamName" style="font-size: 20px;">Home Team</strong>
+              <span class="vs-badge">VS</span>
+              <strong id="awayTeamName" style="font-size: 20px;">Away Team</strong>
             </div>
-            <p class="match-meta" id="matchCompetition">Matchday 1</p>
-            <button id="btnLaunchMatch" class="action-btn">Launch PES 6 Match</button>
+            <button id="btnLaunchMatch" class="action-btn" style="margin-top: 20px;">Launch PES 6 Match</button>
           </div>
 
-          <!-- Quick Standings Card -->
-          <div class="card quick-standings">
-            <h3>League Standings (Top 5)</h3>
-            <table class="data-table" id="quickTable">
+          <!-- Quick Standings -->
+          <div class="card">
+            <h3>League Standings</h3>
+            <table class="data-table" style="margin-top: 10px;">
               <thead>
-                <tr>
-                  <th>Pos</th>
-                  <th>Club</th>
-                  <th>P</th>
-                  <th>GD</th>
-                  <th>Pts</th>
-                </tr>
+                <tr><th>#</th><th>Club</th><th>P</th><th>GD</th><th>Pts</th></tr>
               </thead>
               <tbody id="quickTableBody"></tbody>
             </table>
@@ -122,146 +116,166 @@
       <!-- 2. LEAGUES & STANDINGS TAB -->
       <section id="tables" class="tab-content">
         <header class="content-header">
-          <h1>Leagues & Standings</h1>
-          <select id="leagueSelector" class="custom-select">
-            <option value="premier_league">Premier League (England)</option>
-            <option value="ligue_1">Ligue 1 (France)</option>
-            <option value="serie_a">Serie A (Italy)</option>
-            <option value="eredivisie">Eredivisie (Netherlands)</option>
-            <option value="la_liga">La Liga (Spain)</option>
-            <option value="rest_of_europe">Rest of Europe</option>
-          </select>
+          <h1>League Standings</h1>
+          <div class="custom-dropdown" id="ddLeague">
+            <div class="dropdown-trigger" id="ddLeagueTrigger">English Premiership</div>
+            <div class="dropdown-menu" id="ddLeagueMenu">
+              <div class="dropdown-item" data-val="premier_league">English Premiership</div>
+              <div class="dropdown-item" data-val="la_liga">Liga Española</div>
+              <div class="dropdown-item" data-val="serie_a">Serie A</div>
+              <div class="dropdown-item" data-val="ligue_1">Ligue 1</div>
+              <div class="dropdown-item" data-val="eredivisie">Eredivisie</div>
+              <div class="dropdown-item" data-val="rest_of_europe">Rest of Europe</div>
+            </div>
+          </div>
         </header>
 
         <div class="card full-width">
-          <table class="data-table" id="fullLeagueTable">
+          <table class="data-table">
             <thead>
-              <tr>
-                <th>#</th>
-                <th>Club</th>
-                <th>Played</th>
-                <th>Won</th>
-                <th>Drawn</th>
-                <th>Lost</th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GD</th>
-                <th>Pts</th>
-              </tr>
+              <tr><th>#</th><th>Club</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr>
             </thead>
             <tbody id="fullLeagueTableBody"></tbody>
           </table>
         </div>
       </section>
 
-      <!-- 3. FIXTURES & CALENDAR TAB -->
+      <!-- 3. EUROPEAN CUPS TAB -->
+      <section id="ucl" class="tab-content">
+        <header class="content-header">
+          <div>
+            <h1>UEFA Champions League</h1>
+            <small style="color: var(--text-muted);">Group stage standings & knockout tournament bracket</small>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="btnUclViewGroups" class="action-btn" style="width: auto; padding: 6px 14px; font-size: 12px; background: var(--accent); color: #000; font-weight: 700;">Group Stage</button>
+            <button id="btnUclViewKnockouts" class="action-btn" style="width: auto; padding: 6px 14px; font-size: 12px; background: var(--bg-hover); color: var(--text-main); font-weight: 700;">Knockout Tree</button>
+          </div>
+        </header>
+
+        <div id="uclGroupsView" class="ucl-groups-grid"></div>
+
+        <div id="uclKnockoutView" class="ucl-knockout-container" style="display: none;">
+          <div class="bracket-round">
+            <h4 class="round-title">Round of 16</h4>
+            <div id="bracketR16" class="bracket-matches-column"></div>
+          </div>
+          <div class="bracket-round">
+            <h4 class="round-title">Quarter-Finals</h4>
+            <div id="bracketQF" class="bracket-matches-column"></div>
+          </div>
+          <div class="bracket-round">
+            <h4 class="round-title">Semi-Finals</h4>
+            <div id="bracketSF" class="bracket-matches-column"></div>
+          </div>
+          <div class="bracket-round">
+            <h4 class="round-title">Grand Final</h4>
+            <div id="bracketFinal" class="bracket-matches-column"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. FIXTURES & CALENDAR TAB -->
       <section id="fixtures" class="tab-content">
         <header class="content-header">
-          <h1>Season Fixtures & Results</h1>
-          <div style="display: flex; gap: 10px;">
-            <select id="fixtureLeagueSelector" class="custom-select">
-              <option value="premier_league">Premier League</option>
-              <option value="ligue_1">Ligue 1</option>
-              <option value="serie_a">Serie A</option>
-              <option value="eredivisie">Eredivisie</option>
-              <option value="la_liga">La Liga</option>
-              <option value="rest_of_europe">Rest of Europe</option>
-            </select>
-            <select id="matchdaySelector" class="custom-select" style="max-width: 150px;"></select>
+          <h1>Calendar & Results</h1>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <div class="custom-dropdown" id="ddFixturesLeague">
+              <div class="dropdown-trigger" id="ddFixturesLeagueTrigger">English Premiership</div>
+              <div class="dropdown-menu" id="ddFixturesLeagueMenu">
+                <div class="dropdown-item" data-val="premier_league">English Premiership</div>
+                <div class="dropdown-item" data-val="la_liga">Liga Española</div>
+                <div class="dropdown-item" data-val="serie_a">Serie A</div>
+                <div class="dropdown-item" data-val="ligue_1">Ligue 1</div>
+                <div class="dropdown-item" data-val="eredivisie">Eredivisie</div>
+                <div class="dropdown-item" data-val="rest_of_europe">Rest of Europe</div>
+              </div>
+            </div>
+
+            <div class="custom-dropdown" id="ddFixturesRound" style="min-width: 130px;">
+              <div class="dropdown-trigger" id="ddFixturesRoundTrigger">Round 1</div>
+              <div class="dropdown-menu" id="ddFixturesRoundMenu"></div>
+            </div>
           </div>
         </header>
 
         <div class="card full-width">
-          <div id="fixturesListContainer" class="fixtures-grid"></div>
+          <div id="fixturesListContainer" style="display: flex; flex-direction: column; gap: 8px;"></div>
         </div>
       </section>
 
-      <!-- 4. STATS & TOP SCORERS TAB -->
+      <!-- 5. TOP SCORERS & STATS TAB -->
       <section id="stats" class="tab-content">
         <header class="content-header">
           <h1>Player Statistics & Records</h1>
-          <select id="statsLeagueSelector" class="custom-select">
-            <option value="all">All Leagues Combined</option>
-            <option value="premier_league">Premier League</option>
-            <option value="ligue_1">Ligue 1</option>
-            <option value="serie_a">Serie A</option>
-            <option value="eredivisie">Eredivisie</option>
-            <option value="la_liga">La Liga</option>
-            <option value="rest_of_europe">Rest of Europe</option>
-          </select>
+          <div class="custom-dropdown" id="ddStats">
+            <div class="dropdown-trigger" id="ddStatsTrigger">All Leagues Combined</div>
+            <div class="dropdown-menu" id="ddStatsMenu">
+              <div class="dropdown-item" data-val="all">All Leagues Combined</div>
+              <div class="dropdown-item" data-val="premier_league">Premier League</div>
+              <div class="dropdown-item" data-val="la_liga">La Liga</div>
+              <div class="dropdown-item" data-val="serie_a">Serie A</div>
+              <div class="dropdown-item" data-val="ligue_1">Ligue 1</div>
+              <div class="dropdown-item" data-val="eredivisie">Eredivisie</div>
+              <div class="dropdown-item" data-val="rest_of_europe">Rest of Europe</div>
+            </div>
+          </div>
         </header>
 
         <div class="card full-width">
-          <h3>Golden Boot Leaderboard (Top Scorers)</h3>
-          <table class="data-table" id="topScorersTable">
+          <table class="data-table">
             <thead>
-              <tr>
-                <th>#</th>
-                <th>Player</th>
-                <th>Club</th>
-                <th>Position</th>
-                <th>Assists</th>
-                <th>Goals</th>
-              </tr>
+              <tr><th>#</th><th>Player</th><th>Club</th><th>Pos</th><th>Assists</th><th>Goals</th></tr>
             </thead>
             <tbody id="topScorersTableBody"></tbody>
           </table>
         </div>
       </section>
 
-      <!-- 5. AWARDS TAB -->
+      <!-- 6. AWARDS TAB -->
       <section id="awards" class="tab-content">
         <header class="content-header">
-          <h1>Individual Accolades & Trophies</h1>
+          <h1>Season Honours & Accolades</h1>
         </header>
 
         <div class="dashboard-grid">
           <div class="card">
-            <h3>Ballon d'Or Power Rankings</h3>
-            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;">Based on ratings, goals, assists, and performance.</p>
-            <table class="data-table" id="ballonDorTable">
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Player</th>
-                  <th>Club</th>
-                  <th>Score Points</th>
-                </tr>
-              </thead>
+            <h3>Ballon d'Or Power Ranking</h3>
+            <table class="data-table" style="margin-top: 10px;">
+              <thead><tr><th>Rank</th><th>Player</th><th>Club</th><th>Rating Pts</th></tr></thead>
               <tbody id="ballonDorTableBody"></tbody>
             </table>
           </div>
 
-          <div class="card">
-            <h3>European Golden Shoe</h3>
-            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;">Leading domestic goalscorer across all leagues.</p>
-            <div id="goldenShoeLeader" style="padding: 20px 0; text-align: center;"></div>
+          <div class="card" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+            <h3>Golden Shoe Leader</h3>
+            <div id="goldenShoeLeader" style="margin-top: 14px;"></div>
           </div>
         </div>
       </section>
 
-<!-- 6. SQUAD & TACTICS TAB (FIFA TEAM MANAGEMENT ENGINE) -->
+      <!-- 7. SQUAD & TACTICS TAB -->
       <section id="squad" class="tab-content">
         <div class="fifa-management-wrapper">
-          
-          <!-- Top Bar: Formations & Status -->
           <div class="fifa-top-bar">
             <div class="fifa-tabs-left">
               <span class="fifa-title-pill">SQUAD</span>
-              <select id="formationSelector" class="fifa-select-inline">
-                <option value="4-3-3">4-3-3 Attack</option>
-                <option value="4-2-3-1">4-2-3-1 Modern</option>
-                <option value="4-4-2">4-4-2 Flat</option>
-                <option value="3-5-2">3-5-2 Wingback</option>
-              </select>
+              <div class="custom-dropdown" id="ddFormation">
+                <div class="dropdown-trigger" id="ddFormationTrigger">4-3-3 Attack</div>
+                <div class="dropdown-menu" id="ddFormationMenu">
+                  <div class="dropdown-item" data-val="4-3-3">4-3-3 Attack</div>
+                  <div class="dropdown-item" data-val="4-2-3-1">4-2-3-1 Modern</div>
+                  <div class="dropdown-item" data-val="4-4-2">4-4-2 Flat</div>
+                  <div class="dropdown-item" data-val="3-5-2">3-5-2 Wingback</div>
+                </div>
+              </div>
             </div>
             <div id="selectionStatusChip" class="fifa-action-pill">SELECT PLAYER</div>
           </div>
 
-          <!-- Player Inspection Banner (Radar & Bio) -->
           <div class="fifa-player-banner" id="playerInspector">
             <div class="inspector-bio">
-              <div class="inspector-avatar" id="inspectAvatar">👤</div>
+              <div class="inspector-avatar">👤</div>
               <div class="inspector-text">
                 <div class="inspector-pos-ovr">
                   <span id="inspectPos" class="pos-tag pos-att">CF</span>
@@ -273,15 +287,11 @@
               </div>
             </div>
 
-            <!-- Hexagon Radar Attribute Chart -->
             <div class="inspector-radar">
               <svg viewBox="0 0 200 180" class="radar-svg">
-                <!-- Background Hexagon Grids -->
                 <polygon points="100,20 165,55 165,125 100,160 35,125 35,55" class="radar-grid" />
                 <polygon points="100,45 140,68 140,112 100,135 60,112 60,68" class="radar-grid-inner" />
-                <!-- Dynamic Player Stat Shape -->
                 <polygon id="radarPolygon" points="100,30 155,60 150,120 100,150 45,115 45,65" class="radar-fill" />
-                <!-- Stat Labels -->
                 <text x="100" y="14" class="radar-label" text-anchor="middle">Pace</text>
                 <text x="180" y="58" class="radar-label" text-anchor="start">Shooting</text>
                 <text x="180" y="128" class="radar-label" text-anchor="start">Passing</text>
@@ -292,72 +302,181 @@
             </div>
           </div>
 
-          <!-- Perspective 3D Football Pitch -->
           <div class="fifa-pitch-viewport">
             <div class="fifa-pitch-surface" id="tacticalPitch">
               <div class="pitch-line pitch-box-top"></div>
               <div class="pitch-line pitch-center-circle"></div>
               <div class="pitch-line pitch-box-bottom"></div>
               <div class="pitch-line pitch-half-line"></div>
-              
-              <!-- 11 Pitch Starters Layer -->
               <div id="pitchSlotsLayer" class="fifa-starters-layer"></div>
             </div>
           </div>
 
-          <!-- Horizontal Substitutes Bench -->
           <div class="fifa-bench-wrapper">
             <div class="bench-label-bar">
               <span>SUBSTITUTES</span>
               <small>Click to inspect, swap on pitch, or reorder bench</small>
             </div>
-            <div class="fifa-bench-track" id="benchCardsContainer">
-              <!-- Rendered dynamically -->
+            <div class="fifa-bench-track" id="benchCardsContainer"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. TRANSFERS TAB -->
+      <section id="transfers" class="tab-content">
+        <header class="content-header">
+          <div>
+            <h1>Transfer Market & Club Finances</h1>
+            <small id="transferWindowStatus" style="color: var(--accent); font-weight: 700;">Summer Transfer Window: OPEN</small>
+          </div>
+          <div class="date-badge" style="background: rgba(0, 210, 106, 0.15); color: var(--accent); font-size: 14px; font-weight: 800;">
+            Club Budget: <span id="clubBudgetDisplay">€60,000,000</span>
+          </div>
+        </header>
+
+        <div class="card full-width" style="margin-bottom: 16px; padding: 12px 16px;">
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+            <input type="text" id="transferSearchInput" class="custom-input" style="max-width: 220px;" placeholder="Search player name..." />
+            
+            <div class="custom-dropdown" id="ddTransferLeague" style="min-width: 170px;">
+              <div class="dropdown-trigger" id="ddTransferLeagueTrigger">All Leagues</div>
+              <div class="dropdown-menu" id="ddTransferLeagueMenu">
+                <div class="dropdown-item" data-val="all">All Leagues</div>
+                <div class="dropdown-item" data-val="premier_league">Premier League</div>
+                <div class="dropdown-item" data-val="la_liga">La Liga</div>
+                <div class="dropdown-item" data-val="serie_a">Serie A</div>
+                <div class="dropdown-item" data-val="ligue_1">Ligue 1</div>
+                <div class="dropdown-item" data-val="eredivisie">Eredivisie</div>
+                <div class="dropdown-item" data-val="rest_of_europe">Rest of Europe</div>
+              </div>
+            </div>
+
+            <div class="custom-dropdown" id="ddTransferPos" style="min-width: 150px;">
+              <div class="dropdown-trigger" id="ddTransferPosTrigger">All Positions</div>
+              <div class="dropdown-menu" id="ddTransferPosMenu">
+                <div class="dropdown-item" data-val="all">All Positions</div>
+                <div class="dropdown-item" data-val="GK">Goalkeepers</div>
+                <div class="dropdown-item" data-val="DEF">Defenders</div>
+                <div class="dropdown-item" data-val="MID">Midfielders</div>
+                <div class="dropdown-item" data-val="ATT">Forwards</div>
+              </div>
             </div>
           </div>
+        </div>
 
+        <div class="card full-width">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">Pos</th>
+                <th>Player</th>
+                <th>Club</th>
+                <th style="width: 60px; text-align: center;">OVR</th>
+                <th style="width: 70px; text-align: center;">Cond</th>
+                <th style="width: 120px;">Est. Value</th>
+                <th style="width: 130px; text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="transferMarketTableBody"></tbody>
+          </table>
         </div>
       </section>
 
-      <!-- 7. GAME SETTINGS TAB (WITH BROWSE BUTTON) -->
+      <!-- 9. SETTINGS TAB -->
       <section id="settings" class="tab-content">
         <header class="content-header">
-          <h1>Game Settings & Directory</h1>
+          <h1>Game Settings & Launcher Config</h1>
         </header>
+
         <div class="card full-width">
-          <label for="pesPathInput" style="display:block; margin-bottom: 8px; font-weight: 600;">PES 6 Executable Location (pes6.exe):</label>
+          <h3>PES 6 Executable Location</h3>
+          <p style="color: var(--text-muted); font-size: 13px; margin: 8px 0 16px;">Specify the path to your pes6.exe to launch matches directly from the dashboard.</p>
+          
           <div style="display: flex; gap: 10px; max-width: 600px;">
-            <input type="text" id="pesPathInput" class="custom-input" style="max-width: 100%; flex-grow: 1;" placeholder="Select or paste path to pes6.exe" />
-            <button id="browsePesBtn" class="action-btn" style="width: auto; padding: 10px 18px; white-space: nowrap;">Browse...</button>
+            <input type="text" id="pesPathInput" class="custom-input" placeholder="C:\Games\PES6\pes6.exe" />
+            <button id="browsePesBtn" class="action-btn" style="width: auto; padding: 0 16px;">Browse...</button>
           </div>
-          <button id="saveSettingsBtn" class="action-btn" style="margin-top: 18px; max-width: 200px;">Save Settings</button>
+          
+          <button id="saveSettingsBtn" class="action-btn" style="margin-top: 16px; max-width: 180px;">Save Path</button>
         </div>
       </section>
+
     </main>
   </div>
 
-  <!-- Score Entry Dialog Modal -->
+  <!-- Score Entry Modal -->
   <div id="scoreModal" class="modal-overlay" style="display: none;">
     <div class="modal-card">
-      <h3 id="modalTitle">Match Result</h3>
-      <p id="modalMatchup" style="color: var(--text-muted); margin: 10px 0;"></p>
+      <h3>Match Result</h3>
+      <p id="modalMatchup" style="color: var(--text-muted); margin: 6px 0 14px;"></p>
       
-      <div class="score-input-group">
-        <div class="score-box">
-          <label id="modalHomeName">Home</label>
-          <input type="number" id="homeScoreInput" min="0" max="20" value="0" />
+      <div style="display: flex; gap: 16px; justify-content: center; align-items: center; margin: 16px 0;">
+        <div style="text-align: center;">
+          <label id="modalHomeName" style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px;"></label>
+          <input type="number" id="homeScoreInput" class="custom-input" style="width: 70px; text-align: center; font-size: 20px; font-weight: 800;" min="0" value="0" />
         </div>
-        <span class="colon">-</span>
-        <div class="score-box">
-          <label id="modalAwayName">Away</label>
-          <input type="number" id="awayScoreInput" min="0" max="20" value="0" />
+        <span style="font-weight: 800; font-size: 20px;">:</span>
+        <div style="text-align: center;">
+          <label id="modalAwayName" style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px;"></label>
+          <input type="number" id="awayScoreInput" class="custom-input" style="width: 70px; text-align: center; font-size: 20px; font-weight: 800;" min="0" value="0" />
         </div>
       </div>
 
       <div class="modal-actions" style="display: flex; gap: 10px;">
         <button id="closeModalBtn" class="action-btn" style="background-color: var(--bg-hover); color: var(--text-main);">Cancel</button>
-        <button id="confirmScoreBtn" class="action-btn">Confirm & Advance Week</button>
+        <button id="confirmScoreBtn" class="action-btn">Confirm Final Score</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Transfer Bid Modal -->
+  <div id="transferModal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <h3>Transfer Negotiation</h3>
+      <p id="bidTargetInfo" style="color: var(--text-muted); margin: 8px 0;"></p>
+      
+      <div style="margin: 16px 0;">
+        <label style="display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px;">Your Transfer Offer (€):</label>
+        <input type="number" id="bidAmountInput" class="custom-input" style="width: 100%; font-size: 18px; font-weight: 800;" step="500000" />
+      </div>
+
+      <div class="modal-actions" style="display: flex; gap: 10px;">
+        <button id="closeTransferModalBtn" class="action-btn" style="background-color: var(--bg-hover); color: var(--text-main);">Cancel</button>
+        <button id="confirmBidBtn" class="action-btn">Submit Official Bid</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Season Summary & Awards Ceremony Modal -->
+  <div id="seasonEndModal" class="modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 550px; text-align: center;">
+      <h1 style="color: var(--accent); font-size: 26px; margin-bottom: 4px;">🏆 Season Concluded!</h1>
+      <p id="seasonEndSubtitle" style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Season 2006/07 Final Honours</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; text-align: left;">
+        <div style="background: var(--bg-hover); padding: 12px; border-radius: 8px; border: 1px solid var(--border);">
+          <small style="color: var(--text-muted); font-size: 10px; font-weight: 800; text-transform: uppercase;">Domestic Champion</small>
+          <h3 id="championClubName" style="color: #fff; margin-top: 4px;">Arsenal</h3>
+        </div>
+        <div style="background: var(--bg-hover); padding: 12px; border-radius: 8px; border: 1px solid var(--border);">
+          <small style="color: var(--text-muted); font-size: 10px; font-weight: 800; text-transform: uppercase;">UCL Champion</small>
+          <h3 id="uclWinnerName" style="color: var(--accent); margin-top: 4px;">TBD</h3>
+        </div>
+        <div style="background: var(--bg-hover); padding: 12px; border-radius: 8px; border: 1px solid var(--border);">
+          <small style="color: var(--text-muted); font-size: 10px; font-weight: 800; text-transform: uppercase;">Golden Boot</small>
+          <h3 id="goldenBootWinner" style="color: #fff; margin-top: 4px;">Thierry Henry</h3>
+        </div>
+        <div style="background: var(--bg-hover); padding: 12px; border-radius: 8px; border: 1px solid var(--border);">
+          <small style="color: var(--text-muted); font-size: 10px; font-weight: 800; text-transform: uppercase;">Ballon d'Or Winner</small>
+          <h3 id="ballonDorWinner" style="color: #fff; margin-top: 4px;">Ronaldinho</h3>
+        </div>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+        Starting the new season will advance player ages, apply development rating curves, award prize money, and reset league fixtures.
+      </p>
+
+      <button id="btnAdvanceToNewSeason" class="action-btn" onclick="advanceToNextSeason()">Advance to Next Season</button>
     </div>
   </div>
 
