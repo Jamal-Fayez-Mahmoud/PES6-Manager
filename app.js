@@ -3,55 +3,72 @@ const database = {
     premier_league: {
       name: "English Premiership",
       teams: [
-        "Arsenal", "Aston Villa", "Blackburn Rovers", "Bolton Wanderers", "Charlton Athletic",
-        "Chelsea", "Everton", "Fulham", "Liverpool", "Manchester City",
-        "Manchester United", "Middlesbrough", "Newcastle United", "Portsmouth", "Reading",
-        "Sheffield United", "Tottenham Hotspur", "Watford", "West Ham United", "Wigan Athletic"
+        { name: "Arsenal", id: 101 }, { name: "Aston Villa", id: 102 }, { name: "Blackburn Rovers", id: 103 },
+        { name: "Bolton Wanderers", id: 104 }, { name: "Charlton Athletic", id: 105 }, { name: "Chelsea", id: 106 },
+        { name: "Everton", id: 107 }, { name: "Fulham", id: 108 }, { name: "Liverpool", id: 109 },
+        { name: "Manchester City", id: 110 }, { name: "Manchester United", id: 111 }, { name: "Middlesbrough", id: 112 },
+        { name: "Newcastle United", id: 113 }, { name: "Portsmouth", id: 114 }, { name: "Reading", id: 115 },
+        { name: "Sheffield United", id: 116 }, { name: "Tottenham Hotspur", id: 117 }, { name: "Watford", id: 118 },
+        { name: "West Ham United", id: 119 }, { name: "Wigan Athletic", id: 120 }
       ]
     },
     ligue_1: {
       name: "Ligue 1",
       teams: [
-        "AJ Auxerre", "Girondins de Bordeaux", "Le Mans", "RC Lens", "Lille",
-        "Lorient", "Olympique Lyonnais", "Olympique de Marseille", "AS Monaco", "ASNL (Nancy)",
-        "FC Nantes", "OGC Nice", "Paris Saint-Germain", "Stade Rennais", "Saint-Étienne",
-        "CS Sedan", "FC Sochaux", "Toulouse FC", "ESTAC Troyes", "Valenciennes FC"
+        { name: "AJ Auxerre", id: 201 }, { name: "Girondins de Bordeaux", id: 202 }, { name: "Le Mans", id: 203 },
+        { name: "RC Lens", id: 204 }, { name: "Lille", id: 205 }, { name: "Lorient", id: 206 },
+        { name: "Olympique Lyonnais", id: 207 }, { name: "Olympique de Marseille", id: 208 }, { name: "AS Monaco", id: 209 },
+        { name: "ASNL (Nancy)", id: 210 }, { name: "FC Nantes", id: 211 }, { name: "OGC Nice", id: 212 },
+        { name: "Paris Saint-Germain", id: 213 }, { name: "Stade Rennais", id: 214 }, { name: "Saint-Étienne", id: 215 },
+        { name: "CS Sedan", id: 216 }, { name: "FC Sochaux", id: 217 }, { name: "Toulouse FC", id: 218 },
+        { name: "ESTAC Troyes", id: 219 }, { name: "Valenciennes FC", id: 220 }
       ]
     },
     serie_a: {
       name: "Serie A",
       teams: [
-        "Ascoli", "Atalanta", "Cagliari", "Catania", "Chievo Verona",
-        "Empoli", "Fiorentina", "Inter Milan", "Lazio", "Livorno",
-        "Messina", "AC Milan", "Palermo", "Parma", "Reggina",
-        "AS Roma", "Sampdoria", "AC Siena", "Torino", "Udinese"
+        { name: "Ascoli", id: 301 }, { name: "Atalanta", id: 302 }, { name: "Cagliari", id: 303 },
+        { name: "Catania", id: 304 }, { name: "Chievo Verona", id: 305 }, { name: "Empoli", id: 306 },
+        { name: "Fiorentina", id: 307 }, { name: "Inter Milan", id: 308 }, { name: "Lazio", id: 309 },
+        { name: "Livorno", id: 310 }, { name: "Messina", id: 311 }, { name: "AC Milan", id: 312 },
+        { name: "Palermo", id: 313 }, { name: "Parma", id: 314 }, { name: "Reggina", id: 315 },
+        { name: "AS Roma", id: 316 }, { name: "Sampdoria", id: 317 }, { name: "AC Siena", id: 318 },
+        { name: "Torino", id: 319 }, { name: "Udinese", id: 320 }
       ]
     },
     eredivisie: {
       name: "Eredivisie",
       teams: [
-        "ADO Den Haag", "Ajax", "AZ Alkmaar", "Excelsior", "Feyenoord",
-        "FC Groningen", "sc Heerenveen", "Heracles Almelo", "NAC Breda", "NEC Nijmegen",
-        "PSV Eindhoven", "RKC Waalwijk", "Roda JC", "Sparta Rotterdam", "FC Twente",
-        "FC Utrecht", "Vitesse", "Willem II"
+        { name: "ADO Den Haag", id: 401 }, { name: "Ajax", id: 402 }, { name: "AZ Alkmaar", id: 403 },
+        { name: "Excelsior", id: 404 }, { name: "Feyenoord", id: 405 }, { name: "FC Groningen", id: 406 },
+        { name: "sc Heerenveen", id: 407 }, { name: "Heracles Almelo", id: 408 }, { name: "NAC Breda", id: 409 },
+        { name: "NEC Nijmegen", id: 410 }, { name: "PSV Eindhoven", id: 411 }, { name: "RKC Waalwijk", id: 412 },
+        { name: "Roda JC", id: 413 }, { name: "Sparta Rotterdam", id: 414 }, { name: "FC Twente", id: 415 },
+        { name: "FC Utrecht", id: 416 }, { name: "Vitesse", id: 417 }, { name: "Willem II", id: 418 }
       ]
     },
     la_liga: {
       name: "Liga Española",
       teams: [
-        "Athletic Club", "FC Barcelona", "Real Betis", "Celta de Vigo", "Deportivo La Coruña",
-        "RCD Espanyol", "Getafe", "Gimnàstic", "Levante", "Atlético Madrid",
-        "Real Madrid", "RCD Mallorca", "CA Osasuna", "Racing Santander", "Real Sociedad",
-        "Recreativo de Huelva", "Sevilla FC", "Valencia CF", "Villarreal CF", "Real Zaragoza"
+        { name: "Athletic Club", id: 501 }, { name: "FC Barcelona", id: 502 }, { name: "Real Betis", id: 503 },
+        { name: "Celta de Vigo", id: 504 }, { name: "Deportivo La Coruña", id: 505 }, { name: "RCD Espanyol", id: 506 },
+        { name: "Getafe", id: 507 }, { name: "Gimnàstic", id: 508 }, { name: "Levante", id: 509 },
+        { name: "Atlético Madrid", id: 510 }, { name: "Real Madrid", id: 511 }, { name: "RCD Mallorca", id: 512 },
+        { name: "CA Osasuna", id: 513 }, { name: "Racing Santander", id: 514 }, { name: "Real Sociedad", id: 515 },
+        { name: "Recreativo de Huelva", id: 516 }, { name: "Sevilla FC", id: 517 }, { name: "Valencia CF", id: 518 },
+        { name: "Villarreal CF", id: 519 }, { name: "Real Zaragoza", id: 520 }
       ]
     },
     rest_of_europe: {
       name: "Rest of Europe",
       teams: [
-        "Anderlecht", "Club Brugge", "Sparta Praha", "FC København", "FC Bayern München",
-        "Olympiacos", "Panathinaikos", "Juventus", "Rosenborg BK", "SL Benfica",
-        "FC Porto", "Sporting CP", "Celtic FC", "Rangers FC", "Djurgårdens IF",
-        "Beşiktaş JK", "Fenerbahçe SK", "Galatasaray SK", "FC Dynamo Kyiv"
+        { name: "Anderlecht", id: 601 }, { name: "Club Brugge", id: 602 }, { name: "Sparta Praha", id: 603 },
+        { name: "FC København", id: 604 }, { name: "FC Bayern München", id: 605 }, { name: "Olympiacos", id: 606 },
+        { name: "Panathinaikos", id: 607 }, { name: "Juventus", id: 608 }, { name: "Rosenborg BK", id: 609 },
+        { name: "SL Benfica", id: 610 }, { name: "FC Porto", id: 611 }, { name: "Sporting CP", id: 612 },
+        { name: "Celtic FC", id: 613 }, { name: "Rangers FC", id: 614 }, { name: "Djurgårdens IF", id: 615 },
+        { name: "Beşiktaş JK", id: 616 }, { name: "Fenerbahçe SK", id: 617 }, { name: "Galatasaray SK", id: 618 },
+        { name: "FC Dynamo Kyiv", id: 619 }
       ]
     }
   },
@@ -92,8 +109,14 @@ let selectedStatsLeague = "all";
 let selectedTableLeague = "premier_league";
 let selectedFixturesLeague = "premier_league";
 let selectedFixturesRound = 0;
+let calendarMode = "round";
 let transferFilterLeague = "all";
 let transferFilterPos = "all";
+
+// Setup modal temporary choices
+let setupSelectedLeague = "premier_league";
+let setupSelectedTeam = "Arsenal";
+let setupSelectedNational = "none";
 
 let ucl = {
   groups: {},
@@ -214,29 +237,36 @@ function isTransferWindowOpen(gw) {
   return SUMMER_WINDOW_WEEKS.includes(gw) || WINTER_WINDOW_WEEKS.includes(gw);
 }
 
-function getPlayerRadarAttributes(p) {
+function getPlayerDetailedAttributes(p) {
   const base = p.rating || 80;
-  let pace = base, sho = base, pas = base, dri = base, def = base, phy = base;
+  const clamp = v => Math.min(99, Math.max(35, Math.round(v)));
+
+  let att = base, def = base, bal = base, sta = base, spd = base, acc = base, pow = base, sho = base, drb = base, pas = base, hea = base;
+
   if (p.pos === "CF" || p.pos === "SS") {
-    sho += 6; dri += 4; pace += 3; def -= 25; phy += 2;
+    att += 7; sho += 8; pow += 5; drb += 4; spd += 3; def -= 30; hea += 4;
   } else if (p.pos === "WF" || p.pos === "LWF" || p.pos === "RWF") {
-    pace += 8; dri += 7; pas += 2; def -= 28; sho += 2;
+    att += 6; spd += 9; acc += 8; drb += 9; pas += 3; def -= 32; sho += 3;
   } else if (["CMF", "AMF", "SMF", "LMF", "RMF"].includes(p.pos)) {
-    pas += 8; dri += 6; sho += 1; def -= 10; phy -= 2;
+    pas += 8; drb += 7; sta += 5; att += 2; def -= 12; hea -= 5;
   } else if (p.pos === "DMF") {
-    def += 7; phy += 8; pas += 3; dri -= 5; sho -= 10;
+    def += 8; bal += 8; sta += 7; pas += 4; drb -= 6; att -= 12;
   } else if (["CB", "LB", "RB", "SB", "LWB", "RWB"].includes(p.pos)) {
-    def += 10; phy += 9; pace += (p.pos === "CB" ? -5 : 4); sho -= 25; dri -= 10;
+    def += 11; bal += 9; hea += 8; sta += 6; spd += (p.pos === "CB" ? -5 : 4); att -= 30; sho -= 25;
   } else if (p.pos === "GK") {
-    def = base + 5; phy = base + 2; sho = 20; pas = 45; dri = 25; pace = 45;
+    def = base + 7; bal = base + 5; sho = 20; pas = 45; drb = 25; spd = 48; att = 20;
   }
-  const clamp = v => Math.min(99, Math.max(30, Math.round(v)));
-  return { pace: clamp(pace), shooting: clamp(sho), passing: clamp(pas), dribbling: clamp(dri), defending: clamp(def), physical: clamp(phy) };
+
+  return {
+    att: clamp(att), def: clamp(def), bal: clamp(bal), sta: clamp(sta),
+    spd: clamp(spd), acc: clamp(acc), pow: clamp(pow), sho: clamp(sho),
+    drb: clamp(drb), pas: clamp(pas), hea: clamp(hea)
+  };
 }
 
 function computeRadarPoints(attrs) {
   const cx = 100, cy = 90, maxR = 68;
-  const vals = [attrs.pace, attrs.shooting, attrs.passing, attrs.dribbling, attrs.defending, attrs.physical];
+  const vals = [attrs.spd, attrs.sho, attrs.pas, attrs.drb, attrs.def, attrs.bal];
   const angles = [-90, -30, 30, 90, 150, 210];
   return vals.map((v, i) => {
     const r = (v / 100) * maxR;
@@ -248,11 +278,17 @@ function computeRadarPoints(attrs) {
 function updatePlayerInspector(player) {
   if (!player) return;
   inspectedPlayerId = player.id;
+
   const nameEl = document.getElementById("inspectName");
   const ovrEl = document.getElementById("inspectOvr");
   const posEl = document.getElementById("inspectPos");
   const condEl = document.getElementById("inspectCond");
   const bioEl = document.getElementById("inspectClubNat");
+
+  const ageEl = document.getElementById("inspectAge");
+  const footEl = document.getElementById("inspectFoot");
+  const heightEl = document.getElementById("inspectHeight");
+  const pesIdEl = document.getElementById("inspectPesId");
 
   if (nameEl) nameEl.textContent = player.name;
   if (ovrEl) ovrEl.textContent = player.rating;
@@ -263,12 +299,36 @@ function updatePlayerInspector(player) {
   if (condEl) condEl.innerHTML = getConditionIcon(player.condition);
   if (bioEl) bioEl.textContent = `${player.club} • ${player.nationality || "Europe"}`;
 
+  if (ageEl) ageEl.textContent = player.age || 27;
+  if (footEl) footEl.textContent = player.foot || "Right";
+  if (heightEl) heightEl.textContent = `${player.height || 183} cm`;
+  if (pesIdEl) pesIdEl.textContent = `#${player.pesId || player.id}`;
+
+  const attrs = getPlayerDetailedAttributes(player);
+  const setAttr = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+
+  setAttr("attrAtt", attrs.att);
+  setAttr("attrDef", attrs.def);
+  setAttr("attrBal", attrs.bal);
+  setAttr("attrSta", attrs.sta);
+  setAttr("attrSpd", attrs.spd);
+  setAttr("attrAcc", attrs.acc);
+  setAttr("attrPow", attrs.pow);
+  setAttr("attrSho", attrs.sho);
+  setAttr("attrDrb", attrs.drb);
+  setAttr("attrPas", attrs.pas);
+  setAttr("attrHea", attrs.hea);
+  setAttr("attrVal", "€" + (calculatePlayerValue(player) / 1000000).toFixed(1) + "M");
+
   const poly = document.getElementById("radarPolygon");
-  if (poly) poly.setAttribute("points", computeRadarPoints(getPlayerRadarAttributes(player)));
+  if (poly) poly.setAttribute("points", computeRadarPoints(attrs));
 }
 
 function generateSchedule(teamList) {
-  let teams = [...teamList];
+  let teams = [...teamList].map(t => typeof t === "string" ? t : t.name);
   if (teams.length % 2 !== 0) teams.push("BYE");
   const numTeams = teams.length;
   const numRounds = numTeams - 1;
@@ -327,7 +387,7 @@ function initUclEngine() {
 function initDatabase() {
   for (const [leagueKey, leagueData] of Object.entries(database.leagues)) {
     standings[leagueKey] = leagueData.teams.map((team, idx) => ({
-      position: idx + 1, name: team, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0
+      position: idx + 1, name: team.name, id: team.id, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0
     }));
     fixtures[leagueKey] = generateSchedule(leagueData.teams);
   }
@@ -340,7 +400,7 @@ async function loadPlayers() {
     players = await response.json();
   } catch (err) {
     players = [
-      { id: 1, name: "Thierry Henry", club: "Arsenal", pos: "CF", rating: 97, condition: "green", slotId: 9, isStarter: true, goals: 0, assists: 0 }
+      { id: 1, pesId: 101, name: "Thierry Henry", club: "Arsenal", nationality: "France", pos: "CF", rating: 97, age: 29, foot: "Right", height: 188, condition: "green", slotId: 9, isStarter: true, goals: 0, assists: 0 }
     ];
   }
 }
@@ -523,29 +583,43 @@ function renderUclBracket() {
 
 function renderFixturesTab() {
   const roundMenu = document.getElementById("ddFixturesRoundMenu");
-  const container = document.getElementById("fixturesListContainer");
-  if (!roundMenu || !container) return;
+  const roundContainer = document.getElementById("singleRoundViewContainer");
+  const fullCalendarContainer = document.getElementById("fullCalendarViewContainer");
+  const roundDropdown = document.getElementById("ddFixturesRound");
+
+  if (!roundMenu || !roundContainer || !fullCalendarContainer) return;
 
   const leagueSchedule = fixtures[selectedFixturesLeague] || [];
-  roundMenu.innerHTML = "";
 
-  leagueSchedule.forEach((_, idx) => {
-    const item = document.createElement("div");
-    item.className = "dropdown-item";
-    item.dataset.val = idx;
-    item.textContent = `Round ${idx + 1}`;
-    item.addEventListener("click", (e) => {
-      e.stopPropagation();
-      selectedFixturesRound = idx;
-      const trig = document.getElementById("ddFixturesRoundTrigger");
-      if (trig) trig.textContent = `Round ${idx + 1}`;
-      roundMenu.classList.remove("open");
-      renderFixturesMatches();
+  if (calendarMode === "full") {
+    roundContainer.style.display = "none";
+    fullCalendarContainer.style.display = "grid";
+    if (roundDropdown) roundDropdown.style.opacity = "0.3";
+    renderFullSeasonCalendar(leagueSchedule);
+  } else {
+    roundContainer.style.display = "block";
+    fullCalendarContainer.style.display = "none";
+    if (roundDropdown) roundDropdown.style.opacity = "1";
+
+    roundMenu.innerHTML = "";
+    leagueSchedule.forEach((_, idx) => {
+      const item = document.createElement("div");
+      item.className = "dropdown-item";
+      item.dataset.val = idx;
+      item.textContent = `Round ${idx + 1}`;
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        selectedFixturesRound = idx;
+        const trig = document.getElementById("ddFixturesRoundTrigger");
+        if (trig) trig.textContent = `Round ${idx + 1}`;
+        roundMenu.classList.remove("open");
+        renderFixturesMatches();
+      });
+      roundMenu.appendChild(item);
     });
-    roundMenu.appendChild(item);
-  });
 
-  renderFixturesMatches();
+    renderFixturesMatches();
+  }
 }
 
 function renderFixturesMatches() {
@@ -585,6 +659,38 @@ function renderFixturesMatches() {
   });
 }
 
+function renderFullSeasonCalendar(leagueSchedule) {
+  const container = document.getElementById("fullCalendarViewContainer");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const userTeam = database.userState.selectedTeam;
+
+  leagueSchedule.forEach((roundMatches, roundIdx) => {
+    const roundCard = document.createElement("div");
+    roundCard.className = "calendar-round-card";
+
+    let matchesHtml = "";
+    roundMatches.forEach(m => {
+      const isUser = m.home === userTeam || m.away === userTeam;
+      const score = m.played ? `${m.homeScore}-${m.awayScore}` : "-";
+      matchesHtml += `
+        <div class="calendar-mini-fixture ${isUser ? 'user-match' : ''}">
+          <span style="max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${m.home}</span>
+          <span style="font-weight: 800; color: #fff;">${score}</span>
+          <span style="max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${m.away}</span>
+        </div>
+      `;
+    });
+
+    roundCard.innerHTML = `
+      <div class="calendar-round-title">ROUND ${roundIdx + 1}</div>
+      <div style="display: flex; flex-direction: column; gap: 3px;">${matchesHtml}</div>
+    `;
+    container.appendChild(roundCard);
+  });
+}
+
 function renderTransferMarketTab() {
   const tbody = document.getElementById("transferMarketTableBody");
   const budgetEl = document.getElementById("clubBudgetDisplay");
@@ -609,7 +715,7 @@ function renderTransferMarketTab() {
   if (searchVal) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchVal));
 
   if (transferFilterLeague !== "all") {
-    const lTeams = database.leagues[transferFilterLeague]?.teams || [];
+    const lTeams = database.leagues[transferFilterLeague]?.teams.map(t => t.name) || [];
     filtered = filtered.filter(p => lTeams.includes(p.club));
   }
 
@@ -679,8 +785,9 @@ function ensureSquadConsistency(userTeam) {
     const baseId = Date.now();
     defaultPositions.forEach((pos, idx) => {
       players.push({
-        id: baseId + idx, name: `${userTeam.substring(0, 3).toUpperCase()} Player ${idx + 1}`,
+        id: baseId + idx, pesId: 1000 + idx, name: `${userTeam.substring(0, 3).toUpperCase()} Player ${idx + 1}`,
         club: userTeam, nationality: "Europe", pos: pos, rating: Math.floor(75 + Math.random() * 14),
+        age: 23 + (idx % 7), foot: idx % 3 === 0 ? "Left" : "Right", height: 180 + (idx % 10),
         condition: "green", isStarter: idx < 11, slotId: idx < 11 ? idx : null, benchIdx: idx >= 11 ? (idx - 11) : null,
         goals: 0, assists: 0
       });
@@ -948,7 +1055,7 @@ function renderTopScorers(selectedLeague = "all") {
 
   let filtered = [...players];
   if (selectedLeague !== "all") {
-    const lTeams = database.leagues[selectedLeague].teams;
+    const lTeams = database.leagues[selectedLeague]?.teams.map(t => t.name) || [];
     filtered = filtered.filter(p => lTeams.includes(p.club));
   }
   filtered.sort((a, b) => b.goals - a.goals);
@@ -979,7 +1086,6 @@ function renderAwardsTab() {
   }
 }
 
-// 1. Season Celebration Modal Builder
 function triggerSeasonEndCelebration() {
   const userLeague = database.userState.league;
   const leagueChamp = standings[userLeague] && standings[userLeague][0] ? standings[userLeague][0].name : "Champion";
@@ -1012,7 +1118,6 @@ function triggerSeasonEndCelebration() {
   if (modal) modal.style.display = "flex";
 }
 
-// 2. Global Function: Advance into Next Season
 window.advanceToNextSeason = function() {
   try {
     players.forEach(p => {
@@ -1125,35 +1230,73 @@ function executeMatchday(userHomeScore, userAwayScore) {
   renderFixturesTab();
 }
 
+// In-DOM setup dropdown populator for Teams
 function populateSetupTeams(leagueKey) {
-  const select = document.getElementById("setupTeamSelect");
-  if (!select) return;
-  select.innerHTML = "";
-  database.leagues[leagueKey].teams.forEach(team => {
-    const opt = document.createElement("option");
-    opt.value = team;
-    opt.textContent = team;
-    select.appendChild(opt);
+  const menu = document.getElementById("ddSetupTeamMenu");
+  const trigger = document.getElementById("ddSetupTeamTrigger");
+  if (!menu || !trigger) return;
+
+  menu.innerHTML = "";
+  const teams = database.leagues[leagueKey]?.teams || [];
+
+  if (teams.length > 0) {
+    setupSelectedTeam = teams[0].name;
+    trigger.textContent = teams[0].name;
+  }
+
+  teams.forEach(t => {
+    const item = document.createElement("div");
+    item.className = "dropdown-item";
+    item.dataset.val = t.name;
+    item.textContent = t.name;
+    item.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setupSelectedTeam = t.name;
+      trigger.textContent = t.name;
+      menu.classList.remove("open");
+    });
+    menu.appendChild(item);
   });
 }
 
+// In-DOM setup dropdown populator for National Teams
 function populateSetupNationals() {
-  const select = document.getElementById("setupNationalSelect");
-  if (!select) return;
-  select.innerHTML = "";
-  const defaultOpt = document.createElement("option");
-  defaultOpt.value = "none";
-  defaultOpt.textContent = "None (Focus on Club)";
-  select.appendChild(defaultOpt);
+  const menu = document.getElementById("ddSetupNationalMenu");
+  const trigger = document.getElementById("ddSetupNationalTrigger");
+  if (!menu || !trigger) return;
+
+  menu.innerHTML = "";
+  setupSelectedNational = "none";
+  trigger.textContent = "None (Focus on Club)";
+
+  const defItem = document.createElement("div");
+  defItem.className = "dropdown-item";
+  defItem.dataset.val = "none";
+  defItem.textContent = "None (Focus on Club)";
+  defItem.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setupSelectedNational = "none";
+    trigger.textContent = "None (Focus on Club)";
+    menu.classList.remove("open");
+  });
+  menu.appendChild(defItem);
 
   database.nationalTeams.forEach(nat => {
-    const opt = document.createElement("option");
-    opt.value = nat;
-    opt.textContent = nat;
-    select.appendChild(opt);
+    const item = document.createElement("div");
+    item.className = "dropdown-item";
+    item.dataset.val = nat;
+    item.textContent = nat;
+    item.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setupSelectedNational = nat;
+      trigger.textContent = nat;
+      menu.classList.remove("open");
+    });
+    menu.appendChild(item);
   });
 }
 
+// Reusable Custom Dropdown Activator
 function setupCustomDropdown(triggerId, menuId, onSelect) {
   const trigger = document.getElementById(triggerId);
   const menu = document.getElementById(menuId);
@@ -1161,25 +1304,32 @@ function setupCustomDropdown(triggerId, menuId, onSelect) {
 
   trigger.addEventListener("click", (e) => {
     e.stopPropagation();
-    document.querySelectorAll(".dropdown-menu").forEach(m => { if (m !== menu) m.classList.remove("open"); });
+    // Close all other open dropdowns first
+    document.querySelectorAll(".dropdown-menu").forEach(m => {
+      if (m !== menu) m.classList.remove("open");
+    });
     menu.classList.toggle("open");
   });
 
-  menu.querySelectorAll(".dropdown-item").forEach(item => {
-    item.addEventListener("click", (e) => {
-      e.stopPropagation();
-      trigger.textContent = item.textContent;
-      menu.classList.remove("open");
-      onSelect(item.dataset.val);
+  if (onSelect) {
+    menu.querySelectorAll(".dropdown-item").forEach(item => {
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        trigger.textContent = item.textContent;
+        menu.classList.remove("open");
+        onSelect(item.dataset.val);
+      });
     });
-  });
+  }
 }
 
+// Global click to close open dropdowns
 document.addEventListener("click", () => {
   document.querySelectorAll(".dropdown-menu").forEach(m => m.classList.remove("open"));
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
+  // 1. Dashboard & Module Dropdowns
   setupCustomDropdown("ddLeagueTrigger", "ddLeagueMenu", (val) => renderTable(val));
   setupCustomDropdown("ddStatsTrigger", "ddStatsMenu", (val) => renderTopScorers(val));
   setupCustomDropdown("ddFormationTrigger", "ddFormationMenu", (val) => {
@@ -1205,20 +1355,50 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderTransferMarketTab();
   });
 
-  const setupLeague = document.getElementById("setupLeagueSelect");
-  if (setupLeague) {
-    setupLeague.addEventListener("change", (e) => {
-      populateSetupTeams(e.target.value);
+  // 2. Setup Modal Dropdowns (Zero Freeze Fix)
+  setupCustomDropdown("ddSetupLeagueTrigger", "ddSetupLeagueMenu", (val) => {
+    setupSelectedLeague = val;
+    populateSetupTeams(val);
+  });
+  
+  // Attach direct toggles for Setup Team & Setup National!
+  setupCustomDropdown("ddSetupTeamTrigger", "ddSetupTeamMenu", null);
+  setupCustomDropdown("ddSetupNationalTrigger", "ddSetupNationalMenu", null);
+
+  // Initialize their lists immediately
+  populateSetupNationals();
+  populateSetupTeams("premier_league");
+
+  // Fixtures View Mode Toggles
+  const btnRound = document.getElementById("btnViewRoundFixtures");
+  const btnFull = document.getElementById("btnViewFullCalendar");
+  if (btnRound && btnFull) {
+    btnRound.addEventListener("click", () => {
+      calendarMode = "round";
+      btnRound.classList.add("active");
+      btnFull.classList.remove("active");
+      renderFixturesTab();
+    });
+    btnFull.addEventListener("click", () => {
+      calendarMode = "full";
+      btnFull.classList.add("active");
+      btnRound.classList.remove("active");
+      renderFixturesTab();
     });
   }
 
+  // BEGIN CAREER BUTTON (Clean Slate Initialization)
   const btnStart = document.getElementById("btnStartCareer");
   if (btnStart) {
-    btnStart.addEventListener("click", () => {
-      const name = document.getElementById("managerNameInput")?.value || "Manager";
-      const league = document.getElementById("setupLeagueSelect")?.value || "premier_league";
-      const team = document.getElementById("setupTeamSelect")?.value || "Arsenal";
-      const nat = document.getElementById("setupNationalSelect")?.value || "none";
+    btnStart.addEventListener("click", async () => {
+      const name = document.getElementById("managerNameInput")?.value.trim() || "Manager";
+      const league = setupSelectedLeague || "premier_league";
+      const team = setupSelectedTeam || "Arsenal";
+      const nat = setupSelectedNational || "none";
+
+      const currentPath = localStorage.getItem("pes6_exe_path");
+      localStorage.clear();
+      if (currentPath) localStorage.setItem("pes6_exe_path", currentPath);
 
       database.userState = {
         managerName: name,
@@ -1229,7 +1409,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         budget: 60000000
       };
 
+      await loadPlayers();
+
+      inspectedPlayerId = null;
+      activeSelection = null;
+      selectedTableLeague = league;
+      selectedStatsLeague = "all";
+      selectedFixturesLeague = league;
+      selectedFixturesRound = 0;
+
       initDatabase();
+      ensureSquadConsistency(team);
       saveToStorage();
 
       document.getElementById("careerSetup").style.display = "none";
@@ -1244,20 +1434,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // NEW GAME (RESET) BUTTON
   const btnReset = document.getElementById("btnResetCareer");
   if (btnReset) {
     btnReset.addEventListener("click", () => {
-      localStorage.removeItem("pes6_career_user");
-      localStorage.removeItem("pes6_career_standings");
-      localStorage.removeItem("pes6_career_fixtures");
-      localStorage.removeItem("pes6_career_players");
-      localStorage.removeItem("pes6_career_ucl");
+      const currentPath = localStorage.getItem("pes6_exe_path");
+      localStorage.clear();
+      if (currentPath) localStorage.setItem("pes6_exe_path", currentPath);
 
       const setupEl = document.getElementById("careerSetup");
       if (setupEl) setupEl.style.display = "flex";
 
       populateSetupNationals();
-      populateSetupTeams(document.getElementById("setupLeagueSelect")?.value || "premier_league");
+      populateSetupTeams(setupSelectedLeague);
 
       setTimeout(() => {
         const input = document.getElementById("managerNameInput");
@@ -1269,8 +1458,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  populateSetupNationals();
-  populateSetupTeams("premier_league");
+  // GAME SETTINGS: BROWSE & SAVE HANDLERS
+  const pesPathInput = document.getElementById("pesPathInput");
+  const browsePesBtn = document.getElementById("browsePesBtn");
+  const saveSettingsBtn = document.getElementById("saveSettingsBtn");
+
+  const savedPath = localStorage.getItem("pes6_exe_path");
+  if (savedPath && pesPathInput) pesPathInput.value = savedPath;
+
+  if (browsePesBtn) {
+    browsePesBtn.addEventListener("click", async () => {
+      if (window.pesBridge && window.pesBridge.selectFile) {
+        const selected = await window.pesBridge.selectFile();
+        if (selected && pesPathInput) {
+          pesPathInput.value = selected;
+          localStorage.setItem("pes6_exe_path", selected);
+          alert("PES 6 path successfully selected and saved!");
+        }
+      } else {
+        alert("File browser is available when running inside the Electron desktop app.");
+      }
+    });
+  }
+
+  if (saveSettingsBtn) {
+    saveSettingsBtn.addEventListener("click", () => {
+      const p = pesPathInput ? pesPathInput.value.trim() : "";
+      if (!p) {
+        alert("Please enter a valid path to pes6.exe!");
+        return;
+      }
+      localStorage.setItem("pes6_exe_path", p);
+      alert("Game path saved successfully!");
+    });
+  }
+
   await loadPlayers();
   const hasSave = loadFromStorage();
 
@@ -1288,6 +1510,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderFixturesTab();
   }
 
+  // Sidebar navigation
   document.querySelectorAll(".nav-btn").forEach(button => {
     button.addEventListener("click", () => {
       document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
@@ -1304,6 +1527,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (targetTab === "ucl") renderUclTab();
       if (targetTab === "transfers") renderTransferMarketTab();
       if (targetTab === "fixtures") renderFixturesTab();
+      if (targetTab === "settings") {
+        const currentSaved = localStorage.getItem("pes6_exe_path");
+        if (currentSaved && pesPathInput) pesPathInput.value = currentSaved;
+      }
     });
   });
 
@@ -1378,15 +1605,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // Match Launch & Detection Handler
   const launchBtn = document.getElementById("btnLaunchMatch");
   if (launchBtn) {
     launchBtn.addEventListener("click", async () => {
-      const homeLabel = document.getElementById("homeTeamName").textContent;
-      const awayLabel = document.getElementById("awayTeamName").textContent;
+      const homeLabel = document.getElementById("homeTeamName") ? document.getElementById("homeTeamName").textContent : "Home";
+      const awayLabel = document.getElementById("awayTeamName") ? document.getElementById("awayTeamName").textContent : "Away";
       const exePath = localStorage.getItem("pes6_exe_path");
 
-      if (!exePath && window.pesBridge) {
-        alert("Please set your pes6.exe path in Game Settings first!");
+      if (!exePath) {
+        alert("Please select the game path in Game Settings first!");
         return;
       }
 
@@ -1394,39 +1622,49 @@ document.addEventListener("DOMContentLoaded", async () => {
       launchBtn.style.background = "#ff9900";
       launchBtn.disabled = true;
 
+      const resetLaunchBtn = () => {
+        launchBtn.textContent = "Launch PES 6 Match";
+        launchBtn.style.background = "var(--accent)";
+        launchBtn.disabled = false;
+      };
+
       if (window.pesBridge) {
         const res = await window.pesBridge.launchPes(exePath);
         if (!res.success) {
           alert("Launch error: " + res.error);
-          launchBtn.textContent = "Launch PES 6 Match";
-          launchBtn.style.background = "var(--accent)";
-          launchBtn.disabled = false;
+          resetLaunchBtn();
           return;
         }
 
-        window.pesBridge.onGameClosed(() => {
-          launchBtn.textContent = "Launch PES 6 Match";
-          launchBtn.style.background = "var(--accent)";
-          launchBtn.disabled = false;
-
-          const sim = simulateMatch(homeLabel, awayLabel);
-          document.getElementById("modalMatchup").textContent = `${homeLabel} vs ${awayLabel}`;
-          document.getElementById("modalHomeName").textContent = homeLabel;
-          document.getElementById("modalAwayName").textContent = awayLabel;
-          document.getElementById("homeScoreInput").value = sim.homeScore;
-          document.getElementById("awayScoreInput").value = sim.awayScore;
-          
-          const scoreModal = document.getElementById("scoreModal");
-          if (scoreModal) scoreModal.style.display = "flex";
+        window.pesBridge.onMatchResultDetected((scoreData) => {
+          resetLaunchBtn();
+          alert(`🎮 Match Synced from PES 6 Memory!\nFinal Result: ${homeLabel} ${scoreData.home} - ${scoreData.away} ${awayLabel}`);
+          executeMatchday(scoreData.home, scoreData.away);
         });
+
+        window.pesBridge.onGameClosed(() => {
+          resetLaunchBtn();
+          const scoreModal = document.getElementById("scoreModal");
+          if (scoreModal && scoreModal.style.display !== "flex") {
+            const mMatchup = document.getElementById("modalMatchup");
+            if (mMatchup) mMatchup.textContent = `${homeLabel} vs ${awayLabel}`;
+
+            const mHome = document.getElementById("modalHomeName");
+            if (mHome) mHome.textContent = homeLabel;
+
+            const mAway = document.getElementById("modalAwayName");
+            if (mAway) mAway.textContent = awayLabel;
+
+            scoreModal.style.display = "flex";
+          }
+        });
+
       } else {
         setTimeout(() => {
-          launchBtn.textContent = "Launch PES 6 Match";
-          launchBtn.style.background = "var(--accent)";
-          launchBtn.disabled = false;
+          resetLaunchBtn();
           const scoreModal = document.getElementById("scoreModal");
           if (scoreModal) scoreModal.style.display = "flex";
-        }, 1000);
+        }, 1200);
       }
     });
   }
