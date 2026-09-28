@@ -113,7 +113,6 @@ let calendarMode = "round";
 let transferFilterLeague = "all";
 let transferFilterPos = "all";
 
-// Setup modal temporary choices
 let setupSelectedLeague = "premier_league";
 let setupSelectedTeam = "Arsenal";
 let setupSelectedNational = "none";
@@ -299,9 +298,9 @@ function updatePlayerInspector(player) {
   if (condEl) condEl.innerHTML = getConditionIcon(player.condition);
   if (bioEl) bioEl.textContent = `${player.club} • ${player.nationality || "Europe"}`;
 
-  if (ageEl) ageEl.textContent = player.age || 27;
+  if (ageEl) ageEl.textContent = player.age || 26;
   if (footEl) footEl.textContent = player.foot || "Right";
-  if (heightEl) heightEl.textContent = `${player.height || 183} cm`;
+  if (heightEl) heightEl.textContent = `${player.height || 182} cm`;
   if (pesIdEl) pesIdEl.textContent = `#${player.pesId || player.id}`;
 
   const attrs = getPlayerDetailedAttributes(player);
@@ -399,9 +398,7 @@ async function loadPlayers() {
     const response = await fetch("players.json");
     players = await response.json();
   } catch (err) {
-    players = [
-      { id: 1, pesId: 101, name: "Thierry Henry", club: "Arsenal", nationality: "France", pos: "CF", rating: 97, age: 29, foot: "Right", height: 188, condition: "green", slotId: 9, isStarter: true, goals: 0, assists: 0 }
-    ];
+    players = [];
   }
 }
 
@@ -778,36 +775,40 @@ window.handleTransferList = function(playerId) {
   renderSquadTab();
 };
 
+// Tactical Position-Locking Squad Consistency Engine
 function ensureSquadConsistency(userTeam) {
   let squad = players.filter(p => p.club === userTeam);
-  if (squad.length === 0) {
-    const defaultPositions = ["GK", "LB", "CB", "CB", "RB", "DMF", "CMF", "CMF", "LWF", "CF", "RWF", "GK", "CB", "SB", "CMF", "AMF", "WF", "CF"];
-    const baseId = Date.now();
-    defaultPositions.forEach((pos, idx) => {
-      players.push({
-        id: baseId + idx, pesId: 1000 + idx, name: `${userTeam.substring(0, 3).toUpperCase()} Player ${idx + 1}`,
-        club: userTeam, nationality: "Europe", pos: pos, rating: Math.floor(75 + Math.random() * 14),
-        age: 23 + (idx % 7), foot: idx % 3 === 0 ? "Left" : "Right", height: 180 + (idx % 10),
-        condition: "green", isStarter: idx < 11, slotId: idx < 11 ? idx : null, benchIdx: idx >= 11 ? (idx - 11) : null,
-        goals: 0, assists: 0
-      });
-    });
-    saveToStorage();
-    squad = players.filter(p => p.club === userTeam);
-  }
 
-  let starters = squad.filter(p => p.isStarter);
+  // If starters are unslotted or messed up, sort and lock by actual tactical roles
+  const starters = squad.filter(p => p.isStarter);
   if (starters.length !== 11 || starters.some(p => p.slotId === null || p.slotId === undefined)) {
-    squad.forEach((p, idx) => {
-      p.isStarter = idx < 11;
-      p.slotId = idx < 11 ? idx : null;
-      p.benchIdx = idx >= 11 ? idx - 11 : null;
-    });
+    const gks = squad.filter(p => p.pos === "GK");
+    const defs = squad.filter(p => ["CB", "LB", "RB", "SB", "LWB", "RWB"].includes(p.pos));
+    const mids = squad.filter(p => ["DMF", "CMF", "AMF", "SMF", "LMF", "RMF"].includes(p.pos));
+    const atts = squad.filter(p => ["CF", "SS", "WF", "LWF", "RWF"].includes(p.pos));
+
+    // Reset all players
+    squad.forEach(p => { p.isStarter = false; p.slotId = null; p.benchIdx = null; });
+
+    // Slot 0: Goalkeeper
+    if (gks.length > 0) { gks[0].isStarter = true; gks[0].slotId = 0; }
+
+    // Slots 1 to 4: Defenders
+    defs.slice(0, 4).forEach((d, i) => { d.isStarter = true; d.slotId = i + 1; });
+
+    // Slots 5 to 7: Midfielders
+    mids.slice(0, 3).forEach((m, i) => { m.isStarter = true; m.slotId = i + 5; });
+
+    // Slots 8 to 10: Forwards
+    atts.slice(0, 3).forEach((a, i) => { a.isStarter = true; a.slotId = i + 8; });
+
+    // All remaining players become active bench and reserve players
+    const bench = squad.filter(p => !p.isStarter);
+    bench.forEach((b, i) => { b.benchIdx = i; });
+
     saveToStorage();
   }
 
-  const bench = squad.filter(p => !p.isStarter);
-  bench.forEach((p, idx) => { if (p.benchIdx === null || p.benchIdx === undefined) p.benchIdx = idx; });
   return squad;
 }
 
@@ -1230,7 +1231,6 @@ function executeMatchday(userHomeScore, userAwayScore) {
   renderFixturesTab();
 }
 
-// In-DOM setup dropdown populator for Teams
 function populateSetupTeams(leagueKey) {
   const menu = document.getElementById("ddSetupTeamMenu");
   const trigger = document.getElementById("ddSetupTeamTrigger");
@@ -1259,7 +1259,6 @@ function populateSetupTeams(leagueKey) {
   });
 }
 
-// In-DOM setup dropdown populator for National Teams
 function populateSetupNationals() {
   const menu = document.getElementById("ddSetupNationalMenu");
   const trigger = document.getElementById("ddSetupNationalTrigger");
@@ -1296,7 +1295,6 @@ function populateSetupNationals() {
   });
 }
 
-// Reusable Custom Dropdown Activator
 function setupCustomDropdown(triggerId, menuId, onSelect) {
   const trigger = document.getElementById(triggerId);
   const menu = document.getElementById(menuId);
@@ -1304,7 +1302,6 @@ function setupCustomDropdown(triggerId, menuId, onSelect) {
 
   trigger.addEventListener("click", (e) => {
     e.stopPropagation();
-    // Close all other open dropdowns first
     document.querySelectorAll(".dropdown-menu").forEach(m => {
       if (m !== menu) m.classList.remove("open");
     });
@@ -1323,13 +1320,11 @@ function setupCustomDropdown(triggerId, menuId, onSelect) {
   }
 }
 
-// Global click to close open dropdowns
 document.addEventListener("click", () => {
   document.querySelectorAll(".dropdown-menu").forEach(m => m.classList.remove("open"));
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // 1. Dashboard & Module Dropdowns
   setupCustomDropdown("ddLeagueTrigger", "ddLeagueMenu", (val) => renderTable(val));
   setupCustomDropdown("ddStatsTrigger", "ddStatsMenu", (val) => renderTopScorers(val));
   setupCustomDropdown("ddFormationTrigger", "ddFormationMenu", (val) => {
@@ -1355,21 +1350,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderTransferMarketTab();
   });
 
-  // 2. Setup Modal Dropdowns (Zero Freeze Fix)
   setupCustomDropdown("ddSetupLeagueTrigger", "ddSetupLeagueMenu", (val) => {
     setupSelectedLeague = val;
     populateSetupTeams(val);
   });
   
-  // Attach direct toggles for Setup Team & Setup National!
   setupCustomDropdown("ddSetupTeamTrigger", "ddSetupTeamMenu", null);
   setupCustomDropdown("ddSetupNationalTrigger", "ddSetupNationalMenu", null);
 
-  // Initialize their lists immediately
   populateSetupNationals();
   populateSetupTeams("premier_league");
 
-  // Fixtures View Mode Toggles
   const btnRound = document.getElementById("btnViewRoundFixtures");
   const btnFull = document.getElementById("btnViewFullCalendar");
   if (btnRound && btnFull) {
@@ -1387,7 +1378,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // BEGIN CAREER BUTTON (Clean Slate Initialization)
   const btnStart = document.getElementById("btnStartCareer");
   if (btnStart) {
     btnStart.addEventListener("click", async () => {
@@ -1434,7 +1424,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // NEW GAME (RESET) BUTTON
   const btnReset = document.getElementById("btnResetCareer");
   if (btnReset) {
     btnReset.addEventListener("click", () => {
@@ -1458,7 +1447,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // GAME SETTINGS: BROWSE & SAVE HANDLERS
   const pesPathInput = document.getElementById("pesPathInput");
   const browsePesBtn = document.getElementById("browsePesBtn");
   const saveSettingsBtn = document.getElementById("saveSettingsBtn");
@@ -1510,7 +1498,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderFixturesTab();
   }
 
-  // Sidebar navigation
   document.querySelectorAll(".nav-btn").forEach(button => {
     button.addEventListener("click", () => {
       document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
@@ -1605,7 +1592,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Match Launch & Detection Handler
   const launchBtn = document.getElementById("btnLaunchMatch");
   if (launchBtn) {
     launchBtn.addEventListener("click", async () => {

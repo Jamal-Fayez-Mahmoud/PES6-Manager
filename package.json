@@ -1,12 +1,19 @@
 {
   "name": "pes6-manager",
   "version": "1.0.0",
-  "description": "Custom Career Hub for PES 6",
+  "description": "PES 6 Pro Career Manager Desktop Companion App",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
+  "keywords": [
+    "pes6",
+    "career-manager",
+    "electron"
+  ],
+  "author": "Jamal Mahmood",
+  "license": "ISC",
   "devDependencies": {
-    "electron": "^latest"
+    "electron": "^28.0.0"
   }
 }
