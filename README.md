@@ -34,11 +34,8 @@ A modern desktop career mode engine and tactical companion application built for
 
 ---
 
-## 💻 Local Development Setup
+## 📦 Installation & Setup
 
-To run this repository locally:
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/Jamal23-dev/pes6-pro-career-manager.git](https://github.com/Jamal23-dev/pes6-pro-career-manager.git)
-   cd pes6-pro-career-manager
+1. Download the latest installer (`PES 6 Pro Career Manager Setup 1.0.0.exe`) from the [Releases](https://github.com/Jamal-Fayez-Mahmoud/PES6-Manager/releases) page.
+2. Run the installer to set up the desktop companion app.
+3. Open the app, configure your `pes6.exe` path in **Game Settings**, and launch your career!
