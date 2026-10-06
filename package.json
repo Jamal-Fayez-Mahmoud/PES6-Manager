@@ -7,13 +7,25 @@
   "license": "ISC",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --win portable"
+    "dist": "electron-builder --win"
   },
   "build": {
     "appId": "com.jamal.pes6careermanager",
     "productName": "PES 6 Pro Career Manager",
     "win": {
-      "target": "portable"
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "PES 6 Pro Career Manager"
     },
     "files": [
       "main.js",
@@ -30,6 +42,6 @@
   },
   "devDependencies": {
     "electron": "^28.0.0",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^24.9.1"
   }
 }
